@@ -1,0 +1,143 @@
+\documentclass[a4paper, authoryear, longnamesfirst, 12pt]{elsarticle}
+\usepackage{etex}
+\usepackage{cmap}
+\usepackage[utf8]{inputenc}
+\usepackage{fourier, microtype}
+\usepackage[T1]{fontenc}
+\usepackage[]{amsmath, amsfonts, amsthm, bm, mathtools, commath, soul, booktabs}
+\usepackage{graphicx}
+\usepackage[bf, small, labelsep=period]{caption}
+\usepackage[english]{babel}
+\usepackage{enumerate}
+\usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{color}
+\usepackage{longtable,array,ragged2e}
+\usepackage{cellspace}
+\usepackage{ulem}
+
+\makeatletter
+\def\th@plain{%
+  \thm@notefont{}% same as heading font
+  \itshape % body font
+}
+\def\th@definition{%
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\ps@pprintTitle}{\footnotesize\itshape
+       Preprint submitted to \ifx\@journal\@empty Elsevier
+       \else\@journal\fi\hfill\today}{\hfill\footnotesize \null}{}{}
+\makeatother
+
+\begin{document}
+\frenchspacing
+\newcommand{\ftable}[4]{
+\renewcommand{\tabcolsep}{4.5pt}%
+\begin{table}[htb]
+	\centering
+\caption{#2}
+\label{#1}
+	\footnotesize
+	\scalebox{1}{
+	\begin{tabular}{l >{\hspace*{2pt}}l c *{8}{c}}
+		\toprule
+		\multicolumn{1}{l}{Est.} &
+		\multicolumn{1}{c}{$k$} &
+		\multicolumn{1}{c}{$h$} &
+		\multicolumn{1}{p{1.2cm}}{\centering IP} &
+		\multicolumn{1}{p{1.2cm}}{\centering PI} &
+		\multicolumn{1}{p{1.2cm}}{\centering M\&TS} &
+		\multicolumn{1}{p{1.2cm}}{\centering Emp.} &
+		\multicolumn{1}{p{1.2cm}}{\centering CPI} &
+		\multicolumn{1}{p{1.2cm}}{\centering C.defl.} &
+		\multicolumn{1}{p{1.2cm}}{\centering CPI exc.} &
+		\multicolumn{1}{p{1.2cm}}{\centering PPI} \\
+		\midrule
+        \input{#3}
+\bottomrule
+\multicolumn{11}{m{15cm}}{\vspace*{2pt} Notes: 
+The results are reported as MSFEs relative to AR($p$) forecasts with $0\leq p \leq 6$ choosen by BIC.
+Bold indicates lowest value in a column, underlined 
+indicates lowest value in a block, i.e.\
+between to horizontal lines.
+All models include $p$ AR lags where $p$ is chosen by BIC.
+The last row gives the RMSFE is the benchmark AR model.
+Average value of the tuning parameter is: $\bar\psi=\input{#4}$.
+}\\
+	\end{tabular}}
+\end{table}
+\renewcommand{\tabcolsep}{6pt}%
+}
+
+\newcommand{\pktable}[3]{
+\renewcommand{\tabcolsep}{4.5pt}%
+\begin{table}[!ht]
+	\centering
+\caption{#2}
+\label{#1}
+	\footnotesize
+	\scalebox{.88}{
+	\begin{tabular}{l >{\hspace*{2pt}}l c *{16}{c}}
+		\toprule
+		\multicolumn{3}{l}{} &
+		\multicolumn{2}{p{1.5cm}}{\centering IP} &
+		\multicolumn{2}{p{1.5cm}}{\centering PI} &
+		\multicolumn{2}{p{1.5cm}}{\centering M\&TS} &
+		\multicolumn{2}{p{1.5cm}}{\centering Emp.} &
+		\multicolumn{2}{p{1.5cm}}{\centering CPI} &
+		\multicolumn{2}{p{1.5cm}}{\centering C.defl.} &
+		\multicolumn{2}{p{1.5cm}}{\centering CPI exc.} &
+		\multicolumn{2}{p{1.5cm}}{\centering PPI} \\
+        \cmidrule(lr){4-5}
+        \cmidrule(lr){6-7}
+        \cmidrule(lr){8-9}
+        \cmidrule(lr){10-11}
+        \cmidrule(lr){12-13}
+        \cmidrule(lr){14-15}
+        \cmidrule(lr){16-17}
+        \cmidrule(lr){18-19}
+		\multicolumn{1}{l}{Est.} &
+		\multicolumn{1}{c}{$k$} &
+		\multicolumn{1}{c}{$h$} &
+		\multicolumn{1}{c}{$\bar p$} &
+		\multicolumn{1}{c}{$\bar k$} &
+		\multicolumn{1}{c}{$\bar p$} &
+		\multicolumn{1}{c}{$\bar k$} &
+		\multicolumn{1}{c}{$\bar p$} &
+		\multicolumn{1}{c}{$\bar k$} &
+		\multicolumn{1}{c}{$\bar p$} &
+		\multicolumn{1}{c}{$\bar k$} &
+		\multicolumn{1}{c}{$\bar p$} &
+		\multicolumn{1}{c}{$\bar k$} &
+		\multicolumn{1}{c}{$\bar p$} &
+		\multicolumn{1}{c}{$\bar k$} &
+		\multicolumn{1}{c}{$\bar p$} &
+		\multicolumn{1}{c}{$\bar k$} &
+		\multicolumn{1}{c}{$\bar p$} &
+		\multicolumn{1}{c}{$\bar k$}\\
+		\midrule
+        \input{#3}
+\bottomrule
+\multicolumn{19}{m{17.5cm}}{\vspace*{2pt} Notes: 
+$\bar p$ is the average number of AR lags included in a model across the expriment, 
+similarly $\bar k$ is the average number of factors.
+}\\
+	\end{tabular}}
+\end{table}
+\renewcommand{\tabcolsep}{6pt}%
+}
+\ftable{tab:forc12}{Forecasting results for the 12-month horizon.}{table12}{psi12}
+\ftable{tab:forc6}{Forecasting results for the 6-month horizon.}{table6}{psi6}
+\ftable{tab:forc24}{Forecasting results for the 24-month horizon.}{table24}{psi24}
+\pktable{tab:pk12}{Forecasting results for the 12-month horizon: Average number of AR lags and
+factors included in the models.}{pktable12}
+\pktable{tab:pk6}{Forecasting results for the 6-month horizon: Average number of AR lags and
+factors included in the models.}{pktable6}
+\pktable{tab:pk24}{Forecasting results for the 24-month horizon: Average number of AR lags and
+factors included in the models.}{pktable24}
+\end{document}

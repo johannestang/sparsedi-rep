@@ -1,0 +1,14 @@
+.Rproj.user
+.Rhistory
+.RData
+inst/doc
+.*.swp
+app/rescache
+app/tex/*.aux
+app/tex/*.log
+app/tex/*.out
+app/tex/*.spl
+app/*.RData
+app/run.*
+app/sparsedi-rep.e*
+app/sparsedi-rep.o*
